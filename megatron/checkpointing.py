@@ -22,11 +22,11 @@ import numpy as np
 
 import torch
 
-from megatron import (get_args,
-                      mpu,
-                      print_rank_0,
-                      update_num_microbatches,
-                      utils)
+from megatron import get_args
+from megatron import mpu
+from megatron import print_rank_0
+from megatron import update_num_microbatches
+from megatron import utils
 
 _CHECKPOINT_VERSION = None
 
