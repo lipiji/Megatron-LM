@@ -3,13 +3,13 @@
 # Runs the "345M" parameter model
 
 RANK=0
-WORLD_SIZE=1
+WORLD_SIZE=3
 
-DATA_PATH=./data/my-gptx_text_document
-CHECKPOINT_PATH=./ckpt/
+DATA_PATH=/apdcephfs/share_916081/pjli/gptx/data/my-gptx_text_document
+CHECKPOINT_PATH=/apdcephfs/share_916081/pjli/gptx/ckpt/
 
 
-python pretrain_gptx.py \
+CUDA_VISIBLE_DEVICES=1,2,4 python pretrain_gptx.py \
        --num-layers 24 \
        --hidden-size 1024 \
        --num-attention-heads 16 \
@@ -24,7 +24,7 @@ python pretrain_gptx.py \
        --data-path $DATA_PATH \
        --vocab-file ./data/gptx.model \
        --data-impl mmap \
-       --split 949,50,1 \
+       --split 9949,50,1 \
        --distributed-backend nccl \
        --lr 0.00015 \
        --min-lr 1.0e-5 \
@@ -34,7 +34,7 @@ python pretrain_gptx.py \
        --lr-warmup-fraction .01 \
        --checkpoint-activations \
        --log-interval 100 \
-       --save-interval 10000 \
+       --save-interval 20000 \
        --eval-interval 1000 \
        --eval-iters 10 \
        --fp16
